@@ -317,15 +317,24 @@ extension MaterialShowcase {
 extension MaterialShowcase {
   
   /// Initializes default view properties
-  func configure() {
-    backgroundColor = UIColor.clear
-    guard let window = UIApplication.shared.keyWindow else {
-      return
+    func configure() {
+        backgroundColor = UIColor.clear
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        containerView = window
+        setDefaultProperties()
     }
-    containerView = window
-    setDefaultProperties()
-  }
-  
+    
+    public func configure() {
+        backgroundColor = UIColor.clear
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        containerView = window
+        setDefaultProperties()
+    }
+
   func setDefaultProperties() {
     // Background
     backgroundPromptColor = BACKGROUND_DEFAULT_COLOR
@@ -696,4 +705,21 @@ extension MaterialShowcase {
     let interactionViews = tabBar.subviews.filter({$0.isUserInteractionEnabled})
     return interactionViews.sorted(by: {$0.frame.minX < $1.frame.minX})
   }
+}
+
+extension MaterialShowcase {
+    
+    public init(customContainerView: UIView) {
+        // Create frame
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        super.init(frame: frame)
+        
+        configureContainerView(customContainerView)
+    }
+    
+    func configureContainerView(_ containerView: UIView) {
+        backgroundColor = UIColor.clear
+        containerView = containerView
+        setDefaultProperties()
+    }
 }
