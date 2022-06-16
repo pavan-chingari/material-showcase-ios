@@ -325,15 +325,6 @@ extension MaterialShowcase {
         containerView = window
         setDefaultProperties()
     }
-    
-    public func configure() {
-        backgroundColor = UIColor.clear
-        guard let window = UIApplication.shared.keyWindow else {
-            return
-        }
-        containerView = window
-        setDefaultProperties()
-    }
 
   func setDefaultProperties() {
     // Background
@@ -709,17 +700,12 @@ extension MaterialShowcase {
 
 extension MaterialShowcase {
     
-    public init(customContainerView: UIView) {
-        // Create frame
-        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        super.init(frame: frame)
-        
+    public convenience init(customContainerView: UIView) {
+        self.init()
         configureContainerView(customContainerView)
     }
     
     func configureContainerView(_ containerView: UIView) {
-        backgroundColor = UIColor.clear
-        containerView = containerView
-        setDefaultProperties()
+        self.containerView = containerView
     }
 }
